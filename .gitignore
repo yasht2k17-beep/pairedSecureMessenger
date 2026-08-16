@@ -1,15 +1,25 @@
+# Virtual environment
 venv/
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 
-database/
-uploads/
+# Private keys
+keys/
+*.key
 
+# Database
+data/*.db
+
+# Runtime uploads
+uploads/*
+files/*
+
+# Environment/secrets
+.env
+.env.*
+
+# IDE
 .vscode/
 .idea/
-keys/
-
-files/
-*.db
-
-.env
