@@ -1,8 +1,8 @@
 from database import Database
-from auth import Auth
-from pair import PairManager
-from message import Message
-from filemanager import FileManager
+from server.auth import Auth
+from server.pair import PairManager
+from server.message import Message
+from server.filemanager import FileManager
 
 
 def register(auth):

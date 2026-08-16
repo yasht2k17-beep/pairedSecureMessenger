@@ -1,6 +1,6 @@
 import bcrypt
-from database import Database
-from keys import KeyManager
+from .database import Database
+from client.keys import KeyManager
 
 class Auth:
     def __init__(self,db):
@@ -21,18 +21,11 @@ class Auth:
         user=self.db.fetchOne("SELECT * FROM users WHERE username=?",(username,))
         return user is not None
 
-    def register(self,username,password):
+    def register(self,username,password,publicKey):
         if self.userExists(username):
             return False
         
         passHash=self.hashPass(password)
-
-        keyManager = KeyManager(username)
-
-        privateKey = keyManager.getPrivateKey()
-        publicKey = keyManager.getPublicKey(privateKey)
-
-        publicKeyBytes = publicKey.public_bytes_raw()
 
         self.db.execute(
             """
@@ -46,25 +39,22 @@ class Auth:
             (
                 username,
                 passHash,
-                publicKeyBytes.hex()
+                publicKey
             )
         )
-
-        self.currentUser=username
         return True
 
     def login(self,username,password):
-        if not self.userExists(username):
-            return False
+        
         user=self.db.fetchOne("SELECT password_hash FROM users WHERE username=?",
         (username,))
 
+        if user is None:
+            return False
+        
         storedHash=user[0]
 
-        if self.verifyPass(password,storedHash):
-            self.currentUser=username
-            return True
-        return False
+        return self.verifyPass(password,storedHash)
 
     def logout(self):
         self.currentUser=None

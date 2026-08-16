@@ -1,5 +1,5 @@
 from database import Database
-from auth import Auth
+from server.auth import Auth
 
 
 db = Database()

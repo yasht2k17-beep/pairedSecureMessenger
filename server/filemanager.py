@@ -1,7 +1,7 @@
 import os
 import base64
-from crypto import Crypto
-from keys import KeyManager
+from client.crypto import Crypto
+from client.keys import KeyManager
 from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PublicKey
 
 class FileManager:

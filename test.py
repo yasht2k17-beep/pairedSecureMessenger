@@ -1,8 +1,8 @@
 from database import Database
-from auth import Auth
-from pair import PairManager
-from message import Message
-from crypto import Crypto
+from server.auth import Auth
+from server.pair import PairManager
+from server.message import Message
+from client.crypto import Crypto
 
 
 # =========================

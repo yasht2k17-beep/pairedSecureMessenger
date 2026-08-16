@@ -4,8 +4,8 @@ import os
 class Database:
 
     def __init__(self):
-        self.dbPath="database/messenger.db"
-        os.makedirs("database",exist_ok=True)
+        self.dbPath="data/messenger.db"
+        os.makedirs("data",exist_ok=True)
         self.createTables()
 
     def connect(self):
